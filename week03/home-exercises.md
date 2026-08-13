@@ -2,7 +2,7 @@
 
 Work through these before the next lecture. They cover everything from [`03-loops.ipynb`](03-loops.ipynb): `for` loops and `range`, the accumulator pattern, `break` and `continue`, `enumerate` and `zip`, looping over dictionaries, `while` loops, nested loops, `.split()` and `.join()`, and list comprehension.
 
-Create your own notebook or script for your answers. Solution proposals are in this folder as home-exercise-N-solution.py`. Try each exercise properly before you open them.
+Create your own **scripts** for your answers. Solution proposals are in this folder as `home_exercise_N_solution.py`. Try each exercise properly before you open them.
 
 > 💡 **Tip:** Several of these programs ask the user to type something. Write them as **scripts** rather than notebooks — in a notebook the prompt appears at the top of the window rather than under the cell, which gets tiresome once a program asks three questions in a row.
 

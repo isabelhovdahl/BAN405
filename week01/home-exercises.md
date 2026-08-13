@@ -2,7 +2,7 @@
 
 Work through these before the next lecture. They cover everything from [`01-python-basics.ipynb`](01-python-basics.ipynb): variables, numbers, strings, indexing and slicing, lists and dictionaries. 
 
-Create your own notebook or script for your answers. Solution proposals are in this folder as `home-exercise-N-solution.py`. Try each exercise properly before you open them.
+Create your own **scripts** for your answers. Solution proposals are in this folder as `home_exercise_N_solution.py`. Try each exercise properly before you open them.
 
 ---
 
