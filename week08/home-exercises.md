@@ -1,6 +1,6 @@
 # Week 08 — Home exercises
 
-Work through these before the next lecture. They cover everything from [`08-summarizing-and-combining.ipynb`](08-summarizing-and-combining.ipynb): `groupby`, aggregating and transforming, the index of a grouped result, dates and `resample`, `.diff()`, duplicates, `concat`, and `merge` together with the checks that tell you it worked.
+Work through these before the next lecture. They cover everything from [`08-summarizing-and-combining.ipynb`](08-summarizing-and-combining.ipynb): grouping and aggregating, the index of a grouped result, transforming within groups, dates, `resample`, `concat`, duplicates, and `merge` together with the checks that tell you it worked.
 
 Work in a **notebook**, as last time. Solution proposals are in this folder as `home_exercise_N_solution.ipynb`, with their output kept so you can read them without running them. Try each exercise properly before you open them.
 
@@ -182,19 +182,33 @@ Display the five entities with the largest anomaly in 2023. One of the five is n
 
 ---
 
-## 📚 Exercise 3: One year of Apple
+## 📚 Exercise 3: Fifty-five years of the NASDAQ
 
-Load `../data/AAPL.csv` and convert `Date` properly.
+Load `../data/NASDAQ.csv` — the daily closing level of the NASDAQ Composite index — and convert `Date`
+properly, saying the format explicitly.
 
-1. Report the mean closing price by **quarter**, using `resample`. Which quarter was the strongest?
-2. Report total `Volume` by **month**. Which month was the busiest, and what happened that month?
-3. Resample the closing price to **weekly**, taking the last price of each week. How many rows do you get, and why is it not 52?
-4. Add a column with the day-to-day change in `Close`, and a second with the day-to-day **percentage** change. Report the single worst day of 2020 by each measure — they are not the same day. Explain in a markdown cell why not.
-5. Count how many trading days the price rose and how many it fell. The share ended the year up 78%; does the count of up days explain that on its own?
+1. Report the first and last date in the file, and how many trading days fall in each **decade**.
+2. Resample to **annual** closing levels and compute the yearly percentage change. Report the five
+   best and five worst years, and say what happened in the worst two.
+3. Resample to **monthly** closing levels and find the three worst months in the whole series. The
+   worst one is more than fifty years old — look up what happened that month.
+4. Upsample the daily series to **every calendar day**. How many rows does that produce, how many are
+   empty, and what are the empty ones? Then fill them forward, and write a sentence on when carrying
+   the last price forward is reasonable and when it is not.
+5. Compute the mean level for each month two ways — `groupby` on `.dt.month`, and `resample("ME")` —
+   and report how many rows each produces. Explain in a markdown cell what each one is actually
+   measuring, and why only one of them belongs on a chart with time along the bottom.
+
+### Then: the lost decade
+
+Using the annual series from question 2, report the closing level at the end of 1999 and at the end of
+2009, and the percentage change between them. Then find the first year in which the index closed above
+its 1999 level again.
+
+Write a short markdown cell on what that means for the "shares go up over time" claim — and note that
+this series is the NASDAQ, which is unusually concentrated in technology companies.
 
 > 💡 **Tip:** `resample` needs the dates as the index and in order — `.set_index("Date").sort_index()`.
-
----
 
 ## 📚 Exercise 4: Ten files, one table
 
@@ -233,28 +247,45 @@ Load `../data/co2_emissions.csv` and `../data/country_info.csv`.
 
 ---
 
-## 📚 Exercise 6: A loader that finishes the job
+## 📚 Exercise 6: A loader you will call more than once
 
-Last week you wrote `load_emissions`. Write its successor.
+Last week you wrote `load_emissions`, and this week's lecture opened by calling it in one line. This
+exercise writes its successor — the version that also brings in the country file.
 
-`load_panel(emissions_path, info_path, countries_only=True)` should:
+Wrapping loading and cleaning in a function is worth doing for one reason above all: **you run it more
+than once.** Here that is literal, because the two questions below need the table two different ways.
 
-1. Read the emissions file and drop rows with no `co2_total`.
-2. Add `co2_pc`, emissions in tonnes per person.
-3. Read the country file and merge it on, bringing across `region` and `incomeLevel`, using the key that works and `validate=` set to the right shape.
-4. Check that the merge did not change the row count, and **raise a `ValueError` with a useful message** if it did.
-5. If `countries_only` is `True`, drop the entities whose region is `"Aggregates"`. If it is `False`, keep them.
-6. Return the result with a clean index. It should not print anything.
+Write `load_panel(emissions_path, info_path, countries_only=True)` that:
 
-Give it a docstring in the longer format, saying what each parameter does and what comes back.
+1. Reads the emissions file and drops rows with no `co2_total`.
+2. Adds `co2_pc`, emissions in tonnes per person.
+3. Reads the country file and merges it on, bringing across `region` and `incomeLevel`, using the key
+   that works and `validate=` set to the right shape.
+4. Checks that the merge did not change the row count, and **raises a `ValueError` with a useful
+   message** if it did.
+5. If `countries_only` is `True`, drops the entities whose region is `"Aggregates"`. If it is `False`,
+   keeps them.
+6. Returns the result with a clean index. It should not print anything.
+
+Give it a docstring in the longer format, saying what each parameter does, what comes back, and what
+it raises.
 
 Then, below the function:
 
-- Call it both ways and confirm you get 4 872 rows with the default and 5 904 with `countries_only=False`.
-- Using the default, produce a table of total emissions by region and year, as ordinary columns rather than as an index.
-- For 2023, report each region's emissions **per person** — the region's total emissions divided by the region's total population, not the average of its countries' figures. Write the calculation as a function and apply it to the groups.
-- Compare that against the plain average of `co2_pc` within each region, and write a short markdown cell on which regions the two disagree about and why.
+- Call it both ways and confirm you get 4 872 rows with the default and 5 904 with
+  `countries_only=False`.
+- **Use both results together**: total the 2023 emissions of the 203 countries, and compare that
+  against the `World` row, which only exists in the second table. Report the difference and explain it.
+- Produce a table of total emissions by region and year, as ordinary columns rather than as an index.
+- For 2023, report each region's emissions **per person** — the region's total emissions divided by the
+  region's total population, not the average of its countries' figures. Write the calculation as a
+  function and apply it to the groups.
+- Compare that against the plain average of `co2_pc` within each region, and write a short markdown
+  cell on which regions the two disagree about and why.
 
-> 💡 **Tip:** Keep the function in its own cell, with the calls that demonstrate it in the cells below. You will want this table again.
+> 💡 **Tip:** Keep the function in its own cell, with the calls that demonstrate it in the cells
+below. A function tangled up with the code that uses it is a function you end up rewriting.
 
-> 💡 **Tip:** A check that raises is worth more than a comment saying what should be true. `if len(after) != len(before): raise ValueError(...)` turns a silent wrong answer into a stack trace, which is the trade this whole week has been arguing for.
+> 💡 **Tip:** A check that raises is worth more than a comment saying what should be true.
+`if len(after) != len(before): raise ValueError(...)` turns a silent wrong answer into a stack trace,
+which is the trade this whole week has been arguing for.
