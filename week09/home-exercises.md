@@ -20,6 +20,29 @@ This is optional and nothing depends on it. If yours ends up in a state you cann
 
 ---
 
+## Before you start
+
+One thing the lecture did not cover, and exercise 3 needs it.
+
+### Choosing the ticks on a date axis
+
+The lecture used `set_major_formatter` to change how a tick value is *written*. On a date axis you usually want to change **which** ticks appear as well. matplotlib picks them for you, and on a thirty-five year series its choice is often not the one you want.
+
+The date versions live in a module of their own, `matplotlib.dates`:
+
+```python
+import matplotlib.dates as mdates
+
+ax.xaxis.set_major_locator(mdates.YearLocator(5))
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y"))
+```
+
+A **locator** decides where the ticks go; a **formatter** decides what they say. `YearLocator(5)` puts one every five years, and `DateFormatter` takes the same `%Y`, `%b`, `%m` codes you already used with `pd.to_datetime`.
+
+`mdates.MonthLocator()` does the same job for a shorter series, and `mdates.DateFormatter("%b %Y")` gives you `Jan 2020` instead of `2020`.
+
+---
+
 ## 📚 Exercise 1: The same chart, two shapes
 
 The lecture drew one chart from a long table and the same chart from a wide one. This exercise makes you do both, and then decide.
@@ -31,9 +54,10 @@ Load `../data/co2_emissions.csv` and `../data/country_info.csv`, merge them so t
 3. Turn the long table into a **wide** one with `pivot`: one row per year, one column per region. Report its shape, and check that it holds the same number of numbers as the long table did.
 4. Draw the same chart again from the wide table, in **one** call. It should look identical.
 5. Use `melt` to turn the wide table back into a long one, and confirm you get the same number of rows you started with.
-6. In a markdown cell, answer two questions. Which of the two tables would you save to a file, and why? And which of the two chart cells would you rather come back to in six months?
+6. Build a **second** wide table, this time of *total* `co2_total` by region and year, and draw it as a **stacked** bar chart — one bar per year, one segment per region. `df.plot(kind="bar", stacked=True)` does it in one line. Then answer in a comment: why does stacking make sense for this table and not for the one you built in question 1?
+7. In a markdown cell, answer two questions. Which of the two tables would you save to a file, and why? And which of the two chart cells would you rather come back to in six months?
 
-> 💡 **Tip:** Question 6 is the point of the exercise. Both charts are correct, so there is no right answer to look up — there is only the one you can defend.
+> 💡 **Tip:** Question 7 is the point of the exercise. Both charts are correct, so there is no right answer to look up — there is only the one you can defend.
 
 ---
 
@@ -47,9 +71,12 @@ Load it, and look at it before you draw anything: shape, columns, and how many v
 2. **How do categories compare?** Draw a bar chart of average `mpg` by `origin`. Put the number of cars behind each bar somewhere a reader will see it.
 3. **Are two variables related?** Draw a scatter plot of `weight` against `mpg`. Then color the points by `origin` and add a legend. Report the correlation between the two variables.
 4. **How is one variable spread out?** Draw a histogram of `mpg`. Try at least two different values of `bins` and keep the one that shows the most, then mark the mean and the median with vertical lines.
-5. In a markdown cell, write the single sentence each of the four figures is making. If two of them make the same sentence, say which one you would drop.
+5. **Two quantities, two scales.** Cars got lighter and more efficient over the period, and the two numbers are nowhere near the same size — weight is in thousands of pounds, `mpg` is in tens. Draw average `weight` and average `mpg` by `model_year` on one figure using `ax.twinx()`, which gives you a second set of axes sharing the same x-axis but with its own y-axis on the right. Label both y-axes, and give each line a color that matches its axis label.
+6. In a markdown cell, write the single sentence each of the five figures is making. If two of them make the same sentence, say which one you would drop.
 
-> ⚠️ **Warning:** One of the four charts in question 1 has a group whose 1982 average is computed from a very small number of cars. Find it before you write anything about a trend.
+> ⚠️ **Warning:** One of the lines in question 1 has a 1982 average computed from a very small number of cars. Find it before you write anything about a trend.
+
+> ⚠️ **Warning:** A twin-axis chart lets you put any two series side by side at any scale, so it can make almost anything look correlated. Use it when both quantities genuinely belong on the same figure, and never without labeling which line belongs to which axis.
 
 ---
 
@@ -63,8 +90,10 @@ Load it, convert `Date` with an explicit format, set it as the index and sort it
 2. Fix the vertical axis so that a percentage fall in 1995 takes up the same space as the same percentage fall in 2020. Label it so the reader knows what you did.
 3. Shade the **dot-com crash**, from the March 2000 peak to the October 2002 low, and the **financial crisis**, from the October 2007 peak to the March 2009 low. Find those four dates from the data rather than typing them in — `idxmax` and `idxmin` on a slice of the series give you the date of the highest and lowest value in it.
 4. Report the percentage fall in each of the two crashes, and write both onto the figure with `ax.text`.
-5. Add a grid, a title, and axis labels, and save the figure as a `.png` at 300 dpi with the whitespace cropped.
+5. Add a grid, a title, axis labels, and a tick every five years using the locator and formatter from **Before you start**. Then save the figure as a `.png` at 300 dpi with the whitespace cropped.
 6. Now a different chart of the same data: compute the **annual return** for every year from 1990, and draw it as a bar chart with one bar per year. Color the negative years differently from the positive ones. In a markdown cell, say which of your two figures you would put in a report about the NASDAQ, and what question each one answers.
+
+7. Finally, draw the bar chart once more inside a `with plt.style.context(...)` block, using a style of your choice, and say in a comment whether the style helped or got in the way.
 
 > 💡 **Tip:** For question 6 you need a list of colors, one per bar. A list comprehension over the returns gives you one in a single line, and `ax.bar` accepts it as its `color` argument.
 
@@ -105,8 +134,17 @@ Use the same merged table as exercise 4.
 
 1. **One file per group.** Loop over the seven regions and, for each one, draw total emissions over time and save it as its own `.png`. Build the file name from the region with an f-string. Check afterwards that seven files appeared, using `os.listdir`.
 2. Two of the region names contain characters that make an awkward file name. Deal with it — `.replace()` on the string is enough — and say in a comment what you would do if the names came from a file you did not control.
-3. **One figure, several panels.** Draw a 2×2 grid comparing `"China"`, `"United States"`, `"India"` and `"Germany"`: emissions per person over time, one country per panel, on a **shared y-axis**. Give the figure a `suptitle`.
+3. **One figure, several panels.** Draw a 2×2 grid comparing `"China"`, `"United States"`, `"India"` and `"Germany"`: emissions per person over time, one country per panel, on a **shared y-axis**. Add the same dashed reference line at 4.68 tonnes to every panel, give the figure a `suptitle`, and give it **one** legend for the whole figure rather than four identical ones.
 4. Draw the grid a second time *without* sharing the y-axis, and in a markdown cell say what a reader would conclude from each version and which conclusion is right.
 5. Finally, put all four countries on **one** set of axes as four lines with a legend. In a markdown cell, say which of the three figures you would use, and for what.
+
+> 💡 **Tip:** For the shared legend in question 3, take the handles and labels from a single panel and hand them to the figure:
+>
+> ```python
+> handles, labels = axes[0, 0].get_legend_handles_labels()
+> fig.legend(handles, labels, loc="lower center", ncols=2)
+> ```
+>
+> Every panel draws the same two things, so one panel's legend describes them all.
 
 > 💡 **Tip:** Question 5 is the real question. A grid of panels and a single chart with several lines answer different questions: one is *"what did each of these look like?"* and the other is *"how do these compare?"* Neither is the default.
