@@ -11,8 +11,7 @@ The course is a full programming course in two parts.
 
 **Interlude (weeks 5–6) — the tools of the trade.** Version control with git and GitHub, and conda environments. These are the things that turn code into work someone else can reproduce.
 
-**Part 2 (weeks 7–11) — data analysis.** pandas, plotting with matplotlib, data wrangling, and linear
-regression.
+**Part 2 (weeks 7–10) — data analysis.** pandas, plotting with matplotlib, data wrangling, and linear regression.
 
 ---
 
@@ -35,11 +34,11 @@ BAN405/
 Keeping this structure matters: the notebooks load data with paths like `../data/mpg.xlsx`, which only work if the notebook sits in a week folder next to `data/`.
 
 > ⚠️ **Material is subject to change until the link for that week has been posted on Canvas.**
-> Everything is published up front so you can work ahead if you want to — but until a week goes live on Canvas, its content may still be revised.
+> Everything is published up front so you can browse ahead if you want to — but until a week goes live on Canvas, its content will still be revised.
 
 ---
 
 ## License
 
 Material in this repository is licensed under
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). See [`LICENSE`](LICENSE). You are welcome to use the material for your own teaching or study. If you find the material useful, I would be glad to hear about it.
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). You are welcome to use the material for your own teaching or study. If you find the material useful, I would be glad to hear about it.
