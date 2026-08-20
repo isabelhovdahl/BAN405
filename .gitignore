@@ -1,6 +1,5 @@
 # ---------------------------------------------------------------------------
 # INSTRUCTOR MATERIAL — never publish
-# This repository is public. Everything below stays on the local machine only.
 # ---------------------------------------------------------------------------
 CLAUDE.md
 CLAUDE.local.md
@@ -23,7 +22,10 @@ Thumbs.db
 .positron/
 
 # ---------------------------------------------------------------------------
-# Derived data written by the lecture notebooks
-# The source files are tracked; anything a notebook regenerates is not.
+# Derived data and figures written by the lecture notebooks
 # ---------------------------------------------------------------------------
 data/titanic.xlsx
+*.png
+*.jpg
+*.jpeg
+*.svg
