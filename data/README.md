@@ -26,6 +26,7 @@ structure.
 | `titanic.csv` | 891 × 7 | The Titanic passenger manifest, reduced to seven columns. Widely circulated; the version here matches the one used in [datasciencedojo/datasets](https://github.com/datasciencedojo/datasets) |
 | `titanic_pipe.csv` | 891 × 7 | The same data, saved with `\|` as the separator instead of a comma |
 | `AAPL.csv` | 252 × 7 | Daily Apple share prices for 2020, from Yahoo Finance |
+| `NASDAQ.csv` | 13 842 × 2 | Daily closing level of the NASDAQ Composite index, 5 February 1971 to 30 December 2025. Taken unmodified from the [TECH2 course repository](https://github.com/richardfoltyn/TECH2-H26); the series matches FRED's [`NASDAQCOM`](https://fred.stlouisfed.org/series/NASDAQCOM), which is indexed to 100 on its first day |
 | `stocks/` | 10 files, 252 × 7 each | Daily 2020 share prices for AAPL, AMZN, BABA, FB, GOOG, JNJ, JPM, MSFT, TSLA and WMT, from Yahoo Finance |
 | `mpg.xlsx` | 398 × 8 | The Auto MPG dataset, [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/9/auto+mpg) |
 | `FRED_annual.xlsx` | 70 × 6 | Annual US macroeconomic series, 1954–2023, from [FRED](https://fred.stlouisfed.org/) (St. Louis Fed) |
