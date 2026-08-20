@@ -11,7 +11,28 @@ The course is a full programming course in two parts.
 
 **Interlude (weeks 5–6) — the tools of the trade.** Version control with git and GitHub, and conda environments. These are the things that turn code into work someone else can reproduce.
 
-**Part 2 (weeks 7–10) — data analysis.** pandas, plotting with matplotlib, data wrangling, and linear regression.
+**Part 2 (weeks 7–10) — data analysis.** pandas, summarizing and combining data, visualization with matplotlib, and linear regression.
+
+---
+
+## Course schedule
+
+Weeks are numbered relative to the start of the course, not by calendar week — week 01 is the first lecture.
+
+| Week | Topic |
+|---|---|
+| [01](week01/) | Positron and Python basics |
+| [02](week02/) | Decisions |
+| [03](week03/) | Loops |
+| [04](week04/) | Functions |
+| [05](week05/) | The terminal, git and GitHub |
+| [06](week06/) | Conda and project structure |
+| [07](week07/) | Pandas basics |
+| [08](week08/) | Summarizing and combining data |
+| [09](week09/) | Visualization |
+| [10](week10/) | Linear regression |
+
+Each week folder holds that week's lecture notebook, a `home-exercises.md` to work through before the next session, and a solution proposal for each home exercise. Some weeks also have slides.
 
 ---
 
