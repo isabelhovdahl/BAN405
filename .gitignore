@@ -22,10 +22,12 @@ Thumbs.db
 .positron/
 
 # ---------------------------------------------------------------------------
-# Derived data and figures written by the lecture notebooks
+# Derived data, figures and tables written by the lecture notebooks
 # ---------------------------------------------------------------------------
 data/titanic.xlsx
 *.png
 *.jpg
 *.jpeg
 *.svg
+week10/*.xlsx
+*.tex
