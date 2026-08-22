@@ -31,3 +31,4 @@ data/titanic.xlsx
 *.svg
 week10/*.xlsx
 *.tex
+*.html
