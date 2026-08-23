@@ -51,12 +51,6 @@ API](https://datahelpdesk.worldbank.org/knowledgebase/topics/125589) on **13 Aug
 
 `country_info.csv` has one row per entity: `name`, `code`, `region`, `incomeLevel`.
 
-Three things about this data are worth knowing before you use it, and none of them are mistakes:
-
-1. **It contains aggregates as well as countries.** 43 of the 260 entities are World Bank groupings such as `World`, `Arab World` or `East Asia & Pacific`. Adding them to a total counts the same emissions several times over. `country_info.csv` marks them with the region `Aggregates`.
-2. **Values are missing, and not at random.** `population` and `urban` are complete; `nat_resources` is missing 759 times and `renew_energy` 635, mostly for small states and for the most recent years, because those series are published with a lag.
-3. **Two entity names in `country_info.csv` carry a trailing space** — `"Sub-Saharan Africa "` and `"Latin America & Caribbean "` — exactly as the World Bank publishes them. Joining the two files on the name column therefore loses rows silently. Joining on `code` does not. This is what real data is like, and it is the reason to check a join rather than trust it.
-
 Figures rounded for file size: emissions and rents to four decimals, shares to two or three, GDP per capita to two. Population is exact.
 
 World Bank data is published under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
