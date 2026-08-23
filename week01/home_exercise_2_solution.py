@@ -55,7 +55,7 @@ print(f"\nBooking {number}: {origin.upper()} to {destination.upper()} in {year}"
 #
 # The reference is a sequence of fields separated by dashes, and Python has a
 # string method that splits on a separator - which is far less fragile than
-# counting characters. We come back to it later in the course:
+# counting characters:
 #
 #     parts = reference.split("-")
 #     year, origin, destination, number = parts[1], parts[2], parts[3], parts[4]

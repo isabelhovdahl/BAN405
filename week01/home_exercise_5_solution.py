@@ -51,7 +51,7 @@ print(f"\n{fahrenheit} degrees Fahrenheit is {celsius:.0f} degrees Celsius.")
 # cheapest way to catch a formula typed in the wrong order - note that
 #     fahrenheit - 32 * 5 / 9
 # is a perfectly valid expression and a completely wrong conversion, because
-# multiplication happens before subtraction. The brackets are load-bearing.
+# multiplication happens before subtraction.
 #
 # One thing this program does NOT do is cope with a user who types "cold"
 # instead of a number - float() would raise a ValueError and the program would
