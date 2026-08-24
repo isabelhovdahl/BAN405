@@ -2,8 +2,6 @@
 
 *Interlude: tools of the trade*
 
-**Assignment 1 is due this week.**
-
 ## Topics
 
 - Why virtual environments exist, and why you never install into `base`
@@ -20,10 +18,8 @@
 | `exercises.md` | Exercises worked through in the session |
 | `solutions/` | Solution proposals |
 
-## Depth compared with SKL401
-
-SKL401 has a single lesson on packages (1.6) and one on files and paths (1.4). **Environment management and project structure are new.** This is where the difference between a script that runs on your machine and work someone else can reproduce gets made.
+This is where the difference between a script that runs on your machine and work someone else can reproduce gets made.
 
 ---
 
-*Material for this week will be added before the course starts.*
+*Material for this week will be added later.*

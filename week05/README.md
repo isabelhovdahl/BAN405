@@ -20,10 +20,7 @@ This week is a hands-on workshop rather than a notebook. Bring a laptop with git
 | `exercises.md` | Exercises worked through in the session |
 | `solutions/` | Solution proposals |
 
-## Depth compared with SKL401
-
-**Not covered by SKL401 at all.** Together with week 6, this is the part of BAN405 that has no counterpart in the seminar.
 
 ---
 
-*Material for this week will be added before the course starts.*
+*Material for this week will be added later.*
