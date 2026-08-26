@@ -32,7 +32,7 @@ from random import randint
 print(randint(1, 6))
 ```
 
-Both forms are common. The first makes it obvious where a function came from, which matters once a program imports several packages and you are trying to work out what `choice` refers to.
+Both forms are common. The first makes it obvious where a function came from, which matters once a program imports several packages.
 
 > 📝 **Note:** `random` is part of Python's standard library, which means it comes with Python and there is nothing to install. Many of the packages we use later in the course do not come with Python. Getting hold of those — and making sure that everyone running your program has the same versions of them — is a topic we come back to.
 
@@ -166,9 +166,7 @@ Write a program that starts from a password stored in a variable:
 password = "CopyCat1337"
 ```
 
-1. Work out each of the following rules separately, storing each answer in its own variable with a
-   sensible name:
-
+1. Work out each of the following rules separately, storing each answer in its own variable with a sensible name (e.g., `long_enough`, `has_upper`):
    - it is at least 8 characters long
    - it contains at least one uppercase letter
    - it is not made up entirely of letters
@@ -176,22 +174,19 @@ password = "CopyCat1337"
 
 2. Display all four results, each on its own line, so you can see which rules the password passed.
 
-3. Combine the four into a single variable called `strong`, which is `True` only when all four rules
-   hold.
+3. Combine the four into a single variable called `strong`, which is `True` only when all four rules hold.
 
 4. Finish with an `if` / `elif` / `else` chain that displays one of:
-
    - `Strong password.` — all four rules hold
    - `Long enough, but it breaks at least one of the other rules.`
    - `Too short.`
 
 5. Test your program on all five of these:
-
    ```
    "CopyCat1337"    "copycat"    "12345678"    "Bergen!!"    ""
    ```
 
-> ⚠️ **Warning:** One of the four rules will crash on the empty password unless you think about the order of the parts of your condition. That is not an accident — it is the same trap as the guard in the lecture.
+> ⚠️ **Warning:** One of the four rules will crash on the empty password unless you think about the order of the parts of your condition. 
 
 > 💡 **Tip:** "Contains at least one uppercase letter" is the rule we looked at in the lecture, and `.islower()` is not the way to write it.
 
@@ -204,22 +199,16 @@ In the previous set of exercises you wrote a program that converted Fahrenheit t
 The program should:
 
 1. Display a short menu explaining the two options.
-2. Ask the user which conversion they want: `F` to convert Fahrenheit to Celsius, or `C` to convert
-   Celsius to Fahrenheit.
-3. Accept the answer whether it was typed in upper or lower case, and with stray spaces around it.
-   If it is anything other than F or C, display a message saying the selection was not valid — and
-   the program should then do nothing further.
+2. Ask the user which conversion they want: `F` to convert Fahrenheit to Celsius, or `C` to convert Celsius to Fahrenheit.
+3. Accept the answer whether it was typed in upper or lower case, and with stray spaces around it. If it is anything other than F or C, display a message saying the selection was not valid — and the program should then do nothing further.
 4. Otherwise, ask for the temperature and convert it, using
 
    $$C = \frac{5}{9} \times (F - 32) \qquad\qquad F = \frac{9}{5} \times C + 32$$
 
 5. Display the result to one decimal, in a full sentence.
-6. Finally, add a sanity check: nothing can be colder than absolute zero, which is −273.15 °C. If
-   the temperature in Celsius is below that, display a warning that the reading cannot be right.
+6. Finally, add a sanity check: nothing can be colder than absolute zero, which is −273.15 °C. If the temperature in Celsius is below that, display a warning that the reading cannot be right.
 
-Test it with 32 °F, 100 °C, and −300 °C.
-
-> 📝 **Note:** This program still stops with an error if the user types `cold` instead of a number. You cannot fix that properly with what we have covered — `.isdigit()` rejects `-40` and `98.6` too, which are both perfectly good temperatures. Leave it. There is a proper tool for this, and it comes later in the course.
+Test it with 32°F, 100°C, and −300°C.
 
 ---
 
@@ -229,15 +218,11 @@ Write a program that draws a random whole number between two bounds chosen by th
 
 The program should:
 
-1. Display a welcome message saying what the program does, and stating that both bounds must be
-   **whole numbers that are not negative**.
+1. Display a welcome message saying what the program does, and stating that both bounds must be **whole numbers that are not negative**.
 2. Ask the user for a lower bound and an upper bound.
-3. Check that both are whole, non-negative numbers. If either is not, display a message saying so,
-   and stop.
-4. If they are, check that the lower bound is not larger than the upper bound. If it is, display a
-   *different* message saying that, and stop.
-5. Otherwise, draw a random number between the two bounds with `randint` and display it in a
-   sentence.
+3. Check that both are whole, non-negative numbers. If either is not, display a message saying so, and stop.
+4. If they are, check that the lower bound is not larger than the upper bound. If it is, display a *different* message saying that, and stop.
+5. Otherwise, draw a random number between the two bounds with `randint` and display it in a sentence.
 
 Write steps 3 and 4 as a **nested** conditional rather than as one condition joined with `and`, so that the two ways of getting it wrong produce two different messages. Notice while you are writing it that you could not do it any other way round: asking whether the lower bound is smaller is meaningless until you know both inputs are numbers at all.
 
@@ -258,10 +243,8 @@ Write a program that plays the game:
 
 1. Display a welcome message and explain the two options: press `1` to stay silent, `2` to confess.
 2. Ask prisoner A for their choice, then prisoner B for theirs.
-3. Check that both entries are valid. If either one is not, display a message saying the choices
-   were invalid, and stop.
-4. Otherwise, display which choice each prisoner made, in words rather than as numbers, and then
-   the outcome for both of them.
+3. Check that both entries are valid. If either one is not, display a message saying the choices were invalid, and stop.
+4. Otherwise, display which choice each prisoner made, in words rather than as numbers, and then the outcome for both of them.
 
 > 💡 **Tip:** A dictionary mapping `"1"` and `"2"` to the words `"stay silent"` and `"confess"` will save you writing those words out four times, and it gives you something to check the input against as well.
 
@@ -275,8 +258,7 @@ Write a program that:
 
 1. Asks the user for a year.
 2. Checks the input is a whole, non-negative number, and says so if it is not.
-3. Stores the answer in a variable called `is_leap`, using a **single boolean expression** — no `if`
-   statement, and no intermediate variables.
+3. Stores the answer in a variable called `is_leap`, using a **single boolean expression** — no `if` statement, and no intermediate variables. The point of this exercise is to combine multiple conditions with logical operators (`and` and `or`).
 4. Displays a sentence saying whether that year is a leap year.
 
 Check your expression against 2024 (leap), 2023 (not), 1900 (not) and 2000 (leap). If you get 1900 or 2000 wrong, the brackets are in the wrong place.

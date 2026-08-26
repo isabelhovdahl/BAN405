@@ -71,9 +71,9 @@ else:
 # because .isdigit() is False for "-40" and for "98.6", which are both
 # perfectly good temperatures - so the check would reject more valid input
 # than invalid. The tool for this is error handling, and it comes later in the
-# course. Leaving the gap is the right call for now; papering over it with a
+# course. Leaving the gap is the right call for now; adding a
 # check that rejects negative temperatures would be worse than the crash.
 #
 # It also stops after one conversion. Asking again until the user gives a
-# valid answer needs a loop, which you have not met yet.
+# valid answer needs a loop, which comes later in the course.
 # ---------------------------------------------------------------------------

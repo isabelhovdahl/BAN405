@@ -80,6 +80,5 @@ else:
 #     two and 8    -> "must be whole numbers"
 #     (nothing)    -> "must be whole numbers", because "".isdigit() is False
 #
-# Note that randint includes both ends, so 2 and 8 can both come up. The
-# documentation says so; there was no way to guess it.
+# Note that randint includes both ends, so 2 and 8 can both come up. 
 # ---------------------------------------------------------------------------
