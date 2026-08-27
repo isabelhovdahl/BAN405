@@ -4,8 +4,9 @@ Week 03 - Home exercise 6: Phonebook
 
 Solution proposal.
 
-Build a dictionary of names and numbers with a sentinel-terminated while loop,
-display it, and then search it by the start of the number.
+
+Build a dictionary of names and numbers with a while loop that ends when the 
+user presses Enter, display it, and then search it by the start of the number.
 """
 
 # 1. The dictionary starts empty and grows inside the loop. This is the
@@ -21,11 +22,11 @@ print("Press Enter without typing a name to finish.\n")
 
 
 # ---------------------------------------------------------------------------
-# 2. The sentinel loop
+# 2. Collecting entries until the user stops
 #
-# The empty string is the sentinel: the value that means "no more data". We
-# cannot know in advance how many entries the user will type, so there is no
-# sequence for a for loop to walk over. This is what while loops are for.
+# An empty name means "no more data". We cannot know in advance how many entries 
+# the user will type, so there is no sequence for a for loop to walk over. 
+# This is what while loops are for.
 #
 # The condition uses truthiness directly: a non-empty string is truthy and the
 # empty string is falsy, so `while name:` reads as "while the user typed

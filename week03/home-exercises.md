@@ -250,7 +250,7 @@ Write a program that builds a phonebook and then searches it.
 The program should:
 
 1. Create an empty dictionary to hold names and phone numbers.
-2. Use a `while` loop to ask repeatedly for a name and then a phone number, storing each pair in the dictionary. Pressing Enter without typing a name ends the loop — the empty string is the **sentinel**.
+2. Use a `while` loop to ask repeatedly for a name and then a phone number, storing each pair in the dictionary. Pressing Enter without typing a name ends the loop: an empty name means "no more entries".
 3. Display the finished phonebook, one numbered line per entry, using a `for` loop over the dictionary's items.
 4. Ask the user for the first digits of a phone number, for example `47`, and display every entry whose number starts with those digits. If nothing matches, display a message saying so.
 
