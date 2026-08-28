@@ -9,9 +9,10 @@
 # environment. If something in a lecture notebook does not run for you, the
 # first thing to check is that this environment is the one that is active.
 #
-# Versions are pinned to a minor release (3.0 rather than 3.0.5). That is
-# specific enough that everyone in the course gets the same behavior, and loose
-# enough that a bug-fix release does not break the file.
+# Versions are pinned exactly, down to the bug-fix release. That is stricter
+# than most projects need, and it is deliberate: everyone then runs identical
+# software, so a number that appears on the screen at the front of the room
+# appears the same way on your own laptop.
 
 name: ban405
 
@@ -19,11 +20,27 @@ channels:
   - conda-forge
 
 dependencies:
-  - python=3.12          # the interpreter
-  - pandas=3.0           # tables
-  - numpy=2.5            # arrays; the layer pandas is built on
-  - matplotlib=3.11      # figures
-  - statsmodels=0.14     # linear regression, and regression tables
-  - openpyxl=3.1         # lets pandas read and write .xlsx files
-  - tabulate=0.10        # lets DataFrame.to_markdown() work
-  - ipykernel=7.3        # lets Positron run notebooks in this environment
+
+  # The interpreter
+  - python=3.14.6
+
+  # What the course uses directly
+  - numpy=2.5.1            # arrays; the layer pandas is built on
+  - pandas=3.0.3           # tables
+  - matplotlib=3.11.0      # figures
+  - statsmodels=0.15.0     # linear regression, and regression tables
+  - openpyxl=3.1.5         # lets pandas read and write .xlsx files
+
+  # Pulled in by statsmodels anyway; pinned so the version is known rather
+  # than whatever the solver happened to choose on the day
+  - scipy=1.18.0
+
+  # Notebook machinery. Positron itself only needs ipykernel. The rest is here
+  # so that `jupyter notebook` still works as a fallback if Positron ever 
+  # refuses to start.
+  - ipykernel=7.3.0        # lets Positron run notebooks in this environment
+  - ipython=9.15.0
+  - notebook=7.5.7
+  - jupyter_server=2.20.0
+  - jupyter_client=8.9.1
+  - jupyter_core=5.9.1
