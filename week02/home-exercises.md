@@ -127,9 +127,14 @@ print(len(code) > 0 and code[0] == "N")
 **g)**
 
 ```python
+print(bool("0"))
+print(bool([]))
+print(bool({"a": 0}))
 print(bool(" "))
 print(bool(0))
-print(bool("0"))
+print(bool([[]]))
+print(bool(""))
+print(bool({}))
 ```
 
 ### Then: three broken conditions

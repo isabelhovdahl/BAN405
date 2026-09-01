@@ -138,19 +138,35 @@ print("-" * 20)
 
 
 # ---------------------------------------------------------------------------
-# g) Displays: True, False, True
+# g) Displays: True, False, True, True, False, True, False, False
 #
-# " " is a string containing one character, so it is not empty and therefore
-# truthy. "0" is likewise a one-character string, and truthy - unlike the
-# number 0, which is falsy.
+# The whole rule is: zero is false, empty is false, everything else is true.
+# The eight values are four pairs, and in each pair the falsy one is genuinely
+# empty and the truthy one only looks it:
 #
-# The two strings are the reason `if answer:` and `if answer != "":` are not
-# always the same test as `if int(answer) != 0:`.
+#     ""        falsy       " "         truthy - one character, a space
+#     0         falsy       "0"         truthy - one character, a digit
+#     []        falsy       [[]]        truthy - one item, an empty list
+#     {}        falsy       {"a": 0}    truthy - one key, whose value is 0
+#
+# The right-hand column is where the mistakes come from. Emptiness is decided
+# by the container, never by what is inside it: a list holding an empty list is
+# a list holding something, and a dictionary whose only value is 0 still has a
+# key in it. Nothing looks at the contents.
+#
+# This is why `if answer:` and `if answer != "":` are not the same test as
+# `if int(answer) != 0:` - the string "0" passes the first two and fails the
+# third.
 # ---------------------------------------------------------------------------
 
+print(bool("0"))
+print(bool([]))
+print(bool({"a": 0}))
 print(bool(" "))
 print(bool(0))
-print(bool("0"))
+print(bool([[]]))
+print(bool(""))
+print(bool({}))
 
 print("-" * 20)
 
