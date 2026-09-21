@@ -8,8 +8,6 @@ Reads a column of messy text readings, sorting each entry into usable, missing
 or unreadable, and reports on all three without stopping at the first problem.
 """
 
-MISSING_CODE = -999
-
 
 # 1. Turn one field of text into a number, or say that it cannot be done.
 #
@@ -46,10 +44,24 @@ def parse_reading(text):
         return None
 
 
-def main():
-    """Summarize a column of raw readings."""
-    rows = ["12.5", "14.0", "-999", "", "13.2", "n/a", "11.0", "  9.8  ", "-999"]
+# 2-5. Sort, count and report.
+#
+# The missing-value code comes in as a parameter with a default, not as a
+# variable at the top of the file. It is a fact about this dataset, so the
+# caller supplies it - and the next dataset, with a different code, needs a
+# different argument rather than a different program.
+def summarize(rows, missing_code=-999):
+    """
+    Display how many fields are usable, missing and unreadable, and the average
+    of the usable ones.
 
+    Parameters
+    ----------
+    rows : list of str
+        The raw fields.
+    missing_code : float, optional
+        The value that means "no reading was taken". Defaults to -999.
+    """
     # 3. The accumulators, all initialized before the loop.
     total = 0
     usable = 0
@@ -68,7 +80,7 @@ def main():
         if value is None:
             unreadable += 1
             print(f"  skipping unreadable field: '{row}'")
-        elif value == MISSING_CODE:
+        elif value == missing_code:
             missing += 1
         else:
             usable += 1
@@ -88,22 +100,22 @@ def main():
         print(f"\nAverage of the usable readings: {total / usable:.1f}")
 
 
+def main():
+    """Summarize the column of raw readings below."""
+    rows = ["12.5", "14.0", "-999", "", "13.2", "n/a", "11.0", "  9.8  ", "-999"]
+
+    summarize(rows)
+
+
 if __name__ == "__main__":
     main()
 
+    # Step 5: the same function on data with nothing usable in it. Because the
+    # loop lives in a function, the test runs the real code rather than a copy.
     print("\n" + "=" * 50)
     print("The same program with nothing usable in the data:\n")
 
-    rows = ["n/a", "", "-999"]
-
-    usable = 0
-    for row in rows:
-        value = parse_reading(row)
-        if value is not None and value != MISSING_CODE:
-            usable += 1
-
-    if usable == 0:
-        print("No usable readings, so there is no average to report.")
+    summarize(["n/a", "", "-999"])
 
 
 # ---------------------------------------------------------------------------
@@ -122,7 +134,9 @@ if __name__ == "__main__":
 #
 # Put the convention in the function and the function stops traveling. Put it
 # in the loop and both halves are reusable: parse_reading on any text at all,
-# and the three-way sort on any sentinel you like.
+# and the three-way sort on any sentinel you like - which is literally true
+# here, because summarize takes the sentinel as an argument:
+# summarize(rows, missing_code=-1) handles the next file without an edit.
 #
 # That is a general shape rather than a trick: a function should know about the
 # problem it solves and nothing about the program that calls it.

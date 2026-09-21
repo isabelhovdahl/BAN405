@@ -8,8 +8,6 @@ The temperature converter, written a third time: four functions, and neither
 kind of bad input can stop it any more.
 """
 
-ABSOLUTE_ZERO_C = -273.15
-
 
 # 1. Ask for the scale.
 #
@@ -102,12 +100,18 @@ def main():
     # It has to be made on the Celsius value, whichever way round the user was
     # working - so we pick whichever of the two numbers is the Celsius one
     # rather than checking the input blindly.
+    #
+    # absolute_zero lives here, next to the one line that uses it, rather than
+    # at the top of the file: no other function needs it, so no other function
+    # should be able to see it.
+    absolute_zero = -273.15
+
     if scale == "C":
         celsius = temperature
     else:
         celsius = converted
 
-    if celsius < ABSOLUTE_ZERO_C:
+    if celsius < absolute_zero:
         print(f"\nWarning: {celsius:.1f} C is below absolute zero. That reading cannot be right.")
 
 

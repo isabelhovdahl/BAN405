@@ -298,7 +298,7 @@ Then call `random_character` on `"abcdefghijklmnopqrstuvwxyz"` to confirm it is 
 
 ## 📚 Exercise 4: The receipt, refactored
 
-You have written this receipt twice: once by hand, and once with a loop. Write it a third time, as a set of functions.
+You have written this receipt twice: once by hand, and once with a loop. The lecture notebook ([04-functions.ipynb](04-functions.ipynb)) started a third version in its section on building a program out of functions: `line_total`, `format_line` and a `main` holding the data. Start from those and finish the job — the lecture version still does its printing inside `main`, and it has no VAT.
 
 ```python
 items = ["Espresso machine", "Coffee beans", "Oat milk"]
@@ -308,15 +308,15 @@ unit_prices = [4999.00, 149.90, 24.50]
 
 Write four functions and a `main`:
 
-1. `line_total(quantity, unit_price)` — returns the total for one line.
-2. `format_line(item, quantity, unit_price)` — **returns** one formatted line as a string, with the columns lined up and the amounts to two decimals. It should call `line_total` rather than multiplying again.
-3. `receipt_totals(quantities, unit_prices)` — returns **three** values: the subtotal, the VAT at 25% of the subtotal, and the total including VAT.
-4. `print_receipt(items, quantities, unit_prices)` — prints the banner, one line per item, and the three totals, calling the functions above. This is the only one of the four that prints anything.
-5. `main()` — holds the three lists and calls `print_receipt`. No variable in your program should be defined outside a function.
+1. `line_total(quantity, unit_price)` — returns the total for one line. *(From the lecture.)*
+2. `format_line(item, quantity, unit_price)` — **returns** one formatted line as a string, with the columns lined up and the amounts to two decimals. It should call `line_total` rather than multiplying again. *(From the lecture.)*
+3. `receipt_totals(quantities, unit_prices, vat_rate=0.25)` — returns **three** values: the subtotal, the VAT on the subtotal, and the total including VAT. The VAT rate is a parameter with a default, not a variable at the top of the file.
+4. `print_receipt(items, quantities, unit_prices, vat_rate=0.25)` — prints the banner, one line per item, and the three totals, calling the functions above. The VAT line should show the rate it used, for example `VAT (25%)`. This is the only one of the four that prints anything.
+5. `main()` — holds the three lists and calls `print_receipt`, and prints nothing itself. No variable in your program should be defined outside a function.
 
 Give every function a docstring, and call `main()` at the end.
 
-Then test the pieces separately, which is the point of having written it this way: `line_total(3, 24.50)` should give `73.5`, and `receipt_totals([1], [100.0])` should give `100.0`, `25.0` and `125.0`. You can check both without printing a receipt at all.
+Then test the pieces separately, which is the point of having written it this way: `line_total(3, 24.50)` should give `73.5`, `receipt_totals([1], [100.0])` should give `100.0`, `25.0` and `125.0`, and `receipt_totals([1], [100.0], vat_rate=0.15)` should give `100.0`, `15.0` and `115.0`. You can check both without printing a receipt at all.
 
 > 💡 **Tip:** Step 3 returns three values, so the call unpacks into three names: `subtotal, vat, total = receipt_totals(quantities, unit_prices)`.
 
