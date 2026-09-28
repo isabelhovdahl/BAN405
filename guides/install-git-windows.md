@@ -14,7 +14,7 @@ Git is the version control tool we'll use to track and share code throughout the
 
 Why bother: git occasionally opens a text editor by itself, and the installer's default choice is **Vim**, which is hard to use and famously hard even to exit if you have never seen it before. Notepad is a poor editor, but it opens and closes the way you expect. Positron is not offered in this dropdown, so it is not an option here.
 
-The installer also adds **Git Bash**, a terminal available from the Start menu. We won't need it, but it is there if you ever want to use git from the command line.
+The installer also adds **Git Bash**, a terminal available from the Start menu. You will use it for a handful of commands during the course, such as telling git your name and email.
 
 ## Next step
 

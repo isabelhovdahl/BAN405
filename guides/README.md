@@ -14,6 +14,7 @@ Install in this order. Miniforge comes first because Positron looks for a Python
 | 2 | Positron | [Install guide](install-positron.md) (same guide for Windows and Mac) |
 | 3 | Git | [Windows](install-git-windows.md) &nbsp;·&nbsp; [Mac](install-git-mac.md) |
 
+
 ### 2. Check that it all works
 
 Go through the **[verification checklist](verify-installation.md)**. If something is broken, please contact me before the first lecture.
@@ -43,5 +44,7 @@ Guides you can consult at any point during the course.
 
 | Topic | Guide |
 | --- | --- |
+| Version control with git and GitHub | [Working with git and GitHub](git.md) |
+| The `.gitignore` every new repository starts with | [gitignore template](gitignore-template.txt) |
 | Creating, sharing, and managing conda environments | [Working with conda environments](conda-environments.md) |
 | Using AI tools without undermining your learning | [AI guidelines for learning to code](ai-guidelines.md) |

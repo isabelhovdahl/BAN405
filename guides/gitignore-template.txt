@@ -1,0 +1,28 @@
+# .gitignore template for Python projects
+#
+# Copy everything in this file into a file called .gitignore (with the dot,
+# and no .txt) in the top folder of every new repository, and commit it first.
+#
+# Each line is a pattern: git will not track files that match it. Lines
+# starting with # are comments. Add lines of your own at the bottom for things
+# that belong to one project only, such as figures or tables your code writes.
+
+# Python's cache of compiled code, which Python recreates by itself
+__pycache__/
+*.py[cod]
+
+# Jupyter's automatic backup copies of notebooks
+.ipynb_checkpoints/
+
+# Secrets: passwords, API keys and tokens belong in a .env file, never in git
+.env
+
+# Virtual environments created inside a project folder
+.venv/
+venv/
+
+# Files your operating system creates on its own
+.DS_Store
+Thumbs.db
+
+# Your own project's lines go below
