@@ -31,5 +31,23 @@ data/titanic_pipe.csv
 *.jpeg
 *.svg
 week10/*.xlsx
-*.tex
+week10/*.tex
+
+# ---------------------------------------------------------------------------
+# LaTeX build files for the slides. The recipe in .vscode/settings.json puts
+# them in .latex-build/; the extensions catch a build made any other way.
+# Only the .tex source and the .pdf are tracked.
+# ---------------------------------------------------------------------------
+.latex-build/
+*.synctex.gz
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+*.xdv
 *.html
