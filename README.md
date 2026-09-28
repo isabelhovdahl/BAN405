@@ -25,8 +25,8 @@ Weeks are numbered relative to the start of the course, not by calendar week —
 | [02](week02/) | Decisions |
 | [03](week03/) | Loops |
 | [04](week04/) | Functions |
-| [05](week05/) | The terminal, git and GitHub |
-| [06](week06/) | Conda and project structure |
+| [05](week05/) | git and GitHub |
+| [06](week06/) | The terminal, conda and project structure |
 | [07](week07/) | Pandas basics |
 | [08](week08/) | Summarizing and combining data |
 | [09](week09/) | Visualization |
