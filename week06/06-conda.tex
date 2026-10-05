@@ -134,7 +134,7 @@
 \begin{frame}{``Python'' is not one thing on your laptop}
   \begin{columns}[T]
     \begin{column}{0.5\textwidth}
-      Ask the room what \code{import pandas} gives:
+      What \code{import pandas} gives:
       \begin{itemize}
         \item \code{ModuleNotFoundError}
         \item an older pandas, from an earlier course
@@ -188,16 +188,17 @@
   \end{itemize}
   \vspace{0.6em}
   \begin{block}{Together: before you start}
-    Mac: \textbf{Terminal}. Windows: \textbf{Miniforge Prompt}. Never Positron's terminal.\\[0.3em]
-    \code{conda --version}\quad\code{conda env list}\quad\code{conda config --show channels}\\[0.3em]
-    \code{conda-forge} should be at the top. If it is not, the guide shows how to add it.
+    Mac: \textbf{Terminal}. Windows: \textbf{Miniforge Prompt}.\\[0.3em]
+    \code{conda --version}\\
+    \code{conda env list} \\
+    \code{conda config --show channels}\\[0.3em]
   \end{block}
 \end{frame}
 
 \exerciseframe{Exercise 1 --- Create an environment and use it}{%
   \begin{itemize}
-    \item \textbf{In the terminal:} create \code{practice}, with Python 3.14 and pandas. Compare it with \code{base}.
-    \item \textbf{In Positron:} a notebook that prints which Python runs it, and which pandas.
+    \item \textbf{Together, in the terminal:} create \code{practice}, with Python 3.14 and pandas. Compare it with \code{base}.
+    \item \textbf{On your own, in Positron:} a notebook that prints which Python runs it, and which pandas.
     \item Run the same cell with \code{practice}, then with \code{base}.
   \end{itemize}}{Mac: \textbf{Terminal}. Windows: \textbf{Miniforge Prompt}.}
 
@@ -243,8 +244,8 @@
 
 \exerciseframe{Exercise 2 --- Write it down, delete it, rebuild it}{%
   \begin{itemize}
-    \item Go to your \code{week06} folder with \code{cd}: copy the path, do not type it.
-    \item Export \code{practice} to \code{practice.yml}. Delete the environment.
+    \item \textbf{Together:} go to your \code{week06} folder with \code{cd}. Copy the path, do not type it.
+    \item \textbf{On your own:} export \code{practice} to \code{practice.yml}, and delete the environment.
     \item Open a \emph{new} terminal, and rebuild it from the file.
   \end{itemize}}{One step fails on purpose. Read the error.}
 
@@ -295,7 +296,7 @@
     \end{column}
   \end{columns}
   \vspace{0.8em}
-  A number on the screen at the front of the room is the same number on your laptop.
+  Version pinning ensures that you (and everyone else) gets the exact same version of a package every time.
 \end{frame}
 
 \exerciseframe{Exercise 3 --- Build the course environment}{%
@@ -480,16 +481,6 @@
       \end{enumerate}
     \end{column}
   \end{columns}
-\end{frame}
-
-\begin{frame}{What we did not cover}
-  Worth knowing these exist:
-  \begin{itemize}
-    \item \key{\code{conda install}}: adding a package to an environment that already exists. The guide shows how.
-    \item \key{venv and pip}: Python's own environments. The same idea, without conda; the file is usually \code{requirements.txt}.
-    \item \key{Paths from the script's own folder}: \code{pathlib} and \code{\_\_file\_\_} make a script independent of where it is run from.
-    \item \key{Lock files}: every package, down to the last dependency, pinned for each operating system.
-  \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{What you did today}
