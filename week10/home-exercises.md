@@ -8,16 +8,6 @@ Work in a **notebook**. Solution proposals are in this folder as `home_exercise_
 
 > 💡 **Tip:** Every model you fit, check `No. Observations` or `int(results.nobs)` against the number of rows you thought you had. `statsmodels` drops rows with missing values silently, and every exercise below has missing values in it somewhere.
 
-The lecture used `mpg.xlsx` throughout. These use two datasets you have not modeled before — which is the point, because that is what an exam question does.
-
----
-
-## Version control (optional)
-
-If you want the practice: open a terminal in this week's folder, run `git init`, and make a first commit before you start. Then commit after each exercise, with a message saying what you did.
-
-Add a `.gitignore` containing `__pycache__/`, `.ipynb_checkpoints/`, `*.png`, `*.xlsx` and `*.tex`. The last three matter this week: exercises 3 and 4 write figures and tables, and a result your code produced is not something to commit. If your raw data lives in the same folder, name the derived files something you can match on — `output-*.xlsx` — rather than excluding every spreadsheet you own.
-
 ---
 
 ## 📚 Exercise 1: One respondent out of 2,884
@@ -43,13 +33,13 @@ This exercise is about how much one row can be worth.
 
 ## 📚 Exercise 2: Which variable, and in what shape
 
-Back to `../data/mpg.xlsx`. The lecture fitted `mpg` on horsepower three different ways and left the obvious question open: is horsepower even the right variable?
+Back to `../data/mpg.xlsx`. The lecture fitted `mpg` on horsepower as a straight line, as a polynomial and on a log scale, and left the obvious question open: is horsepower even the right variable?
 
 1. Load the file and drop the rows with no `horsepower`.
 2. Write a function `get_adj_r2(data, formula)` that fits a model and returns its adjusted R-squared.
 3. Loop over the four attributes `horsepower`, `weight`, `acceleration` and `model_year`. For each one, fit **three** models — a straight line, a second-order polynomial, and a log of the predictor — and use your function to collect the adjusted R-squared of each. Put all twelve numbers into a single DataFrame with one row per attribute and one column per shape.
 4. Which single attribute explains the most? For that attribute, does the shape matter much?
-5. Now the same question about `cylinders`, which is stored as a number but takes only five values. Fit `mpg ~ horsepower + cylinders` and `mpg ~ horsepower + C(cylinders)` and compare the adjusted R-squared. Print how many cars have each number of cylinders, and say in a markdown cell whether you would use the categorical version and what it costs you.
+5. Now a question about shape of a different kind. `cylinders` is stored as a number, but it takes only five values. As a **number** it forces the model into a straight line: going from 4 to 6 cylinders must have exactly the same effect as going from 6 to 8. As a **category**, `C(cylinders)`, each value gets its own intercept and no such assumption is made. Fit `mpg ~ horsepower + cylinders` and `mpg ~ horsepower + C(cylinders)` and compare the adjusted R-squared. Print how many cars have each number of cylinders, and say in a markdown cell whether you would use the categorical version and what it costs you.
 6. Finally, put your best two attributes together in one model, and say whether the whole is worth more than the parts.
 
 > ⚠️ **Warning:** In question 3 you are comparing twelve models that all explain the **same** dependent variable, `mpg`, on the same rows — so their R-squared values are comparable. Change the left-hand side of any of them and that stops being true.
@@ -58,9 +48,9 @@ Back to `../data/mpg.xlsx`. The lecture fitted `mpg` on horsepower three differe
 
 ## 📚 Exercise 3: What makes a country emit
 
-The table from the last three weeks, modeled. Load `../data/co2_emissions.csv` and `../data/country_info.csv`, merge them on the key that works, drop the aggregates, and add `co2_pc`.
+The emissions table you have already wrangled and plotted, now modeled. Load `../data/co2_emissions.csv` and `../data/country_info.csv`, merge them on the key that works, drop the aggregates, and add `co2_pc`.
 
-**Use 2021, not 2023.** `renew_energy` and `nat_resources` have no values at all for 2022 or 2023, so a 2023 cross-section with those columns in it has zero complete rows. Confirm that for yourself before you take my word for it.
+**Use 2021, not 2023.** `renew_energy` and `nat_resources` have no values at all for 2022 or 2023, so a 2023 cross-section with those columns in it has zero complete rows. 
 
 1. Build the 2021 cross-section, keeping the rows with a value for `co2_pc`, `gdp_pc`, `urban`, `electricity` and `renew_energy`. Report how many countries you have, and how many you lost.
 2. Draw a scatter of `co2_pc` against `gdp_pc`. Then fit `co2_pc ~ gdp_pc` and add the fitted line. Report the R-squared, and say what is wrong with the picture.
@@ -72,15 +62,20 @@ The table from the last three weeks, modeled. Load `../data/co2_emissions.csv` a
 
 ---
 
-## 📚 Exercise 4: One model per region
+## 📚 Exercise 4: What an interaction does
 
-Same 2021 cross-section as exercise 3. The pooled model in question 5 gave every country in the world one elasticity. This exercise asks whether that was a fair thing to do.
+Same 2021 cross-section as exercise 3. The pooled model in question 5 there gave every country in the world one elasticity. An interaction lets each region have its own — in one model, with an adjustment to the slope for every region except the reference.
 
-1. Loop over the seven regions. For each one with **at least ten countries**, fit `np.log(co2_pc) ~ np.log(gdp_pc)` and record the region, the number of countries, the coefficient and its 95% confidence interval. Report which regions you skipped and why.
-2. Put the results in a DataFrame sorted by coefficient, and draw them as a horizontal figure with error bars showing the confidence intervals. Add a vertical reference line at the pooled elasticity from exercise 3.
-3. Find two regions whose confidence intervals do not overlap at all. Name them, and say in one sentence what that means in plain language about income and emissions in those parts of the world.
-4. Some of the intervals contain zero. Pick one, say what that means, and say whether it means the relationship is absent there.
-5. Now fit the interacted model `np.log(co2_pc) ~ np.log(gdp_pc) * C(region)` on all the countries at once. Reconstruct each region's slope from the coefficients and check them against the ones from your loop.
-6. In a markdown cell: which of the two — seven separate models or one interacted model — would you put in a report, and what question is each one answering?
+This exercise builds the same thing the long way, one regression per region, to see exactly what the interaction is doing and where the two approaches part company.
 
-> 💡 **Tip:** In question 5 the reference region is the one with no term of its own in the output. Every other region's slope is the baseline coefficient **plus** its interaction term.
+1. Fit `np.log(co2_pc) ~ np.log(gdp_pc) * C(region)` on all the countries. Which region is the reference, and how can you tell from the output? Reconstruct every region's slope from the coefficients.
+2. Now the long way. Loop over the seven regions. For each one with **at least ten countries**, fit `np.log(co2_pc) ~ np.log(gdp_pc)` on that region's rows alone, and record the region, the number of countries, the coefficient and its 95% confidence interval. Report which regions you skipped and why.
+3. Put the slopes from the loop next to the ones you reconstructed in question 1. What do you find? And what does the interacted model report for the regions the loop skipped — should you believe it?
+4. **Same slope, different uncertainty.** For the reference region, compare the 95% confidence interval from its own regression in question 2 with the interval on `np.log(gdp_pc)` in the interacted model. Which is narrower, and why?
+5. Draw the slopes from the loop as a horizontal figure with error bars (see tip below) showing their confidence intervals, sorted by coefficient. Add a vertical reference line at the pooled elasticity from exercise 3.
+6. Find two regions whose intervals do not overlap at all, and say in one sentence what that means in plain language about income and emissions in those parts of the world. Then pick a region whose interval contains zero: does that mean there is no relationship there?
+7. Back to the interacted model. Print the p-values of the interaction terms. Which regions have a slope that differs significantly from the reference region's? In a markdown cell: what question does the interacted model answer that seven separate regressions cannot?
+
+> 💡 **Tip:** The loop in question 2 is a pattern worth knowing. Start with an empty list; for each region, filter its rows, fit, and `append` a dictionary of the numbers you want; then `pd.DataFrame(your_list)` turns the list into a table with one row per region. A guard like `if len(group) < 10: continue` skips a region before fitting it — a regression on three rows will run, return numbers, and mean nothing, and nothing will warn you.
+
+> 💡 **Tip:** `ax.errorbar(x, y, xerr=..., fmt="o", capsize=4)` draws points with horizontal bars through them. `xerr` takes the *distance* from each point to the ends of its bar, so for an interval that is not symmetric around the estimate, pass a list of two: `[estimate - low, high - estimate]`.
